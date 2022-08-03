@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "access-control",
+    "slug": "access-control",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
