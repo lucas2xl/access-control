@@ -17,6 +17,7 @@
 #import <ReactCommon/RCTTurboModuleManager.h>
 
 #import <react/config/ReactNativeConfig.h>
+#import "RNNordicDfu.h"
 
 @interface AppDelegate () <RCTCxxBridgeDelegate, RCTTurboModuleManagerDelegate> {
   RCTTurboModuleManager *_turboModuleManager;
@@ -54,6 +55,20 @@
 
   [super application:application didFinishLaunchingWithOptions:launchOptions];
 
+    [ReactNativeNavigation bootstrapWithDelegate:self launchOptions:launchOptions];
+
+  [RNNordicDfu setCentralManagerGetter:^() {
+    return [[CBCentralManager alloc] initWithDelegate:nil queue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)];;
+  }];
+
+  [RNNordicDfu setOnDFUComplete:^() {
+    NSLog(@"onDFUComplete");
+  }];
+
+  [RNNordicDfu setOnDFUError:^() {
+    NSLog(@"onDFUError");
+  }];
+  
   return YES;
 }
 

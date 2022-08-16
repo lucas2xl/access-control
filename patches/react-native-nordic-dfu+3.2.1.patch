@@ -1,0 +1,20 @@
+diff --git a/node_modules/react-native-nordic-dfu/ios/RNNordicDfu.m b/node_modules/react-native-nordic-dfu/ios/RNNordicDfu.m
+index ed58530..b143c4e 100644
+--- a/node_modules/react-native-nordic-dfu/ios/RNNordicDfu.m
++++ b/node_modules/react-native-nordic-dfu/ios/RNNordicDfu.m
+@@ -197,6 +197,7 @@ - (void)logWith:(enum LogLevel)level message:(NSString * _Nonnull)message
+     reject(@"nil_central_manager_getter", @"Attempted to start DFU without central manager getter", nil);
+   } else {
+     CBCentralManager * centralManager = getCentralManager();
++    [NSThread sleepForTimeInterval: 2];
+ 
+     if (!centralManager) {
+       reject(@"nil_central_manager", @"Call to getCentralManager returned nil", nil);
+@@ -227,6 +228,7 @@ - (void)logWith:(enum LogLevel)level message:(NSString * _Nonnull)message
+         initiator.delegate = self;
+         initiator.progressDelegate = self;
+         initiator.alternativeAdvertisingNameEnabled = alternativeAdvertisingNameEnabled;
++        initiator.packetReceiptNotificationParameter = 1;
+ 
+         DFUServiceController * controller = [initiator start];
+       }
