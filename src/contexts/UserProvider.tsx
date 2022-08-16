@@ -1,8 +1,8 @@
 import React, { ReactNode, useCallback, useEffect, useState } from 'react';
 import { User, SignIn } from '../interfaces/user';
 import { getItem, removeItem, setItem } from '../utils/localStorage';
+import { UserContext } from './UserContext';
 // import axios from 'axios';
-import { ContextProps, UserContext } from './UserContext';
 
 type ProviderProps = {
   children: ReactNode;
@@ -19,6 +19,7 @@ const defaultUser: User = {
 
 export const UserContextProvider = ({ children }: ProviderProps) => {
   const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
 
   const updateUser = useCallback(async (newData: Partial<User> | null) => {
     setUser((prev) =>
@@ -29,18 +30,19 @@ export const UserContextProvider = ({ children }: ProviderProps) => {
   useEffect(() => {
     (async () => {
       const data = await getItem('user');
-      if (data) setUser(JSON.parse(data));
-      else setUser(defaultUser);
+      if (data) {
+        setUser(JSON.parse(data));
+      }
+      setLoading(false);
     })();
   }, []);
 
   useEffect(() => {
-    const settingsClone = { ...user };
-    setItem('settings', JSON.stringify(settingsClone));
+    const userClone = { ...user };
+    setItem('user', JSON.stringify(userClone));
   }, [user]);
 
   const handleSignIn = async (credentials: SignIn) => {
-    console.log(credentials);
     setUser({
       id: '1',
       email: 'lucas@gmail.com',
@@ -56,13 +58,10 @@ export const UserContextProvider = ({ children }: ProviderProps) => {
     // delete axios.defaults.headers.common.userId;
   };
 
-  const value: ContextProps = {
-    user,
-    updateUser,
-    handleSignIn,
-    handleSignOut,
-  };
-  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
+  return (
+    <UserContext.Provider
+      value={{ user, updateUser, handleSignIn, handleSignOut, loading }}>
+      {children}
+    </UserContext.Provider>
+  );
 };
-
-UserContextProvider.displayName = 'UserContextProvider';

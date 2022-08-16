@@ -41,12 +41,30 @@ export const CardItem = ({
         bg: 'trueGray.700',
         rounded: 'xl',
       }}
+      _light={{
+        _pressed: {
+          bg: 'trueGray.300',
+        },
+      }}
       {...rest}>
       <HStack alignItems="center" justifyContent="space-between" p="4">
         <Box>
           <HStack space="2" alignItems="center">
-            <Icon as={icon} name={iconName} size="sm" color="trueGray.200" />
-            <Text fontSize="lg" color="trueGray.200">
+            <Icon
+              as={icon}
+              name={iconName}
+              size="sm"
+              color="trueGray.200"
+              _light={{
+                color: 'trueGray.800',
+              }}
+            />
+            <Text
+              fontSize="lg"
+              color="trueGray.200"
+              _light={{
+                color: 'trueGray.800',
+              }}>
               {label}
             </Text>
           </HStack>
@@ -60,7 +78,7 @@ export const CardItem = ({
         {type === 'switch' && (
           <Switch
             value={switchValue}
-            onChange={onChangeSwitch}
+            onValueChange={onChangeSwitch}
             offThumbColor="trueGray.500"
             offTrackColor="trueGray.700"
             onTrackColor="trueGray.700"

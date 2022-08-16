@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
-import { Icon, Input } from 'native-base';
+import { Icon, IInputProps, Input } from 'native-base';
 import { MaterialIcons } from '@expo/vector-icons';
 
-interface ModalBodyItemProps {
+interface ModalBodyItemProps extends IInputProps {
   type: 'text' | 'password';
   placeholder: string;
 }
 
-export const ModalBodyItem = ({ type, placeholder }: ModalBodyItemProps) => {
+export const ModalBodyItem = ({
+  type,
+  placeholder,
+  ...rest
+}: ModalBodyItemProps) => {
   const [visibility, setVisibility] = useState(type === 'text' ? true : false);
 
   function handleChangeVisibility() {
@@ -37,10 +41,22 @@ export const ModalBodyItem = ({ type, placeholder }: ModalBodyItemProps) => {
             mr="2"
             color="trueGray.600"
             onPress={handleChangeVisibility}
+            _light={{
+              color: 'trueGray.400',
+            }}
           />
         ) : undefined
       }
       placeholder={placeholder}
+      _light={{
+        borderColor: 'trueGray.400',
+        color: 'trueGray.700',
+        _focus: {
+          bg: 'trueGray.100',
+          borderColor: 'trueGray.300',
+        },
+      }}
+      {...rest}
     />
   );
 };

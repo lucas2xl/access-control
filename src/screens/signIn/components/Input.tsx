@@ -49,6 +49,14 @@ export const Input = forwardRef(
                 </Pressable>
               ) : undefined
             }
+            _light={{
+              color: 'trueGray.800',
+              borderColor: 'trueGray.400',
+              _focus: {
+                bg: 'trueGray.300',
+                borderColor: 'trueGray.800',
+              },
+            }}
             {...rest}
           />
         )}

@@ -1,12 +1,8 @@
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { Box, Center, Icon } from 'native-base';
-import {
-  BorderlessButton,
-  BorderlessButtonProps,
-} from 'react-native-gesture-handler';
+import { Box, Center, Icon, IPressableProps, Pressable } from 'native-base';
 
-interface HeaderButtonProps extends BorderlessButtonProps {
+interface HeaderButtonProps extends IPressableProps {
   icon: React.ComponentProps<typeof Ionicons>['name'];
   color?: string;
   hasNotification?: boolean;
@@ -19,9 +15,23 @@ export const HeaderButton = ({
   ...rest
 }: HeaderButtonProps) => {
   return (
-    <BorderlessButton {...rest}>
-      <Center bgColor="trueGray.800" rounded="xl" p="4">
-        <Icon as={Ionicons} name={icon} color={color ?? 'trueGray.50'} />
+    <Pressable
+      p="4"
+      rounded="xl"
+      bg="trueGray.800"
+      _light={{
+        bg: 'trueGray.200',
+      }}
+      {...rest}>
+      <Center>
+        <Icon
+          as={Ionicons}
+          name={icon}
+          color={color ?? 'trueGray.50'}
+          _light={{
+            color: color ?? 'trueGray.900',
+          }}
+        />
         {hasNotification && (
           <Box
             position="absolute"
@@ -29,11 +39,11 @@ export const HeaderButton = ({
             w="2"
             h="2"
             rounded="full"
-            right="4"
-            top="4/5"
+            right="-0.5"
+            top="-1"
           />
         )}
       </Center>
-    </BorderlessButton>
+    </Pressable>
   );
 };

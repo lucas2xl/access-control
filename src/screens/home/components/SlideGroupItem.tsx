@@ -25,8 +25,16 @@ export const SlideGroupItem = ({
         bg={isSelected ? 'trueGray.800' : 'transparent'}
         borderWidth="1"
         borderColor={isSelected ? 'transparent' : 'muted.600'}
-        rounded="3xl">
-        <Text color="text.50" fontSize="lg">
+        rounded="3xl"
+        _light={{
+          bg: isSelected ? 'trueGray.200' : 'transparent',
+        }}>
+        <Text
+          color="trueGray.100"
+          fontSize="lg"
+          _light={{
+            color: 'trueGray.900',
+          }}>
           {label}
         </Text>
       </Center>

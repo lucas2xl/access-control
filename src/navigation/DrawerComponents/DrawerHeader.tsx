@@ -18,7 +18,13 @@ export const DrawerHeader = ({ username, avatar, city }: DrawerHeaderProps) => {
         }
         size="lg"
       />
-      <Text fontSize="2xl" color="text.50" bold>
+      <Text
+        fontSize="2xl"
+        _light={{
+          color: 'text.900',
+        }}
+        color="text.50"
+        bold>
         {username || ''}
       </Text>
       {!!city && (

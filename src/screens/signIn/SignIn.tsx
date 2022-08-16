@@ -16,7 +16,7 @@ import { Input } from './components/Input';
 import { useForm, FieldValues } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
-import { useUser } from '../../hooks/contex-hooks/useUser';
+import { useUser } from '../../hooks/context-hooks/useUser';
 
 export interface IFormDevice extends FieldValues {
   phone: string;
@@ -68,22 +68,30 @@ export const SignIn = () => {
     console.log('guest');
   }
 
-  console.log(errors);
   return (
     <VStack
       safeArea
       flex="1"
       bg="trueGray.900"
       px="8"
-      justifyContent="space-between">
+      justifyContent="space-between"
+      _light={{
+        bg: 'trueGray.100',
+      }}>
       <Box>
         <Box py="8">
           <Heading
             color="trueGray.100"
-            fontSize="4xl">{`Let's sign you in`}</Heading>
+            fontSize="4xl"
+            _light={{
+              color: 'trueGray.900',
+            }}>{`Let's sign you in`}</Heading>
           <Text
             color="trueGray.200"
-            fontSize="4xl">{`Welcome back.\nYou've been missed!`}</Text>
+            fontSize="3xl"
+            _light={{
+              color: 'trueGray.800',
+            }}>{`Welcome back.\nYou've been missed!`}</Text>
         </Box>
 
         <FormControl mt="4">
@@ -123,12 +131,22 @@ export const SignIn = () => {
       </Box>
 
       <Box>
-        <Text textAlign="center" color="trueGray.400" mb="4" fontSize="md">
+        <Text
+          textAlign="center"
+          color="trueGray.400"
+          mb="4"
+          fontSize="md"
+          _light={{
+            color: 'trueGray.600',
+          }}>
           {`Don't have an account? `}
           <Text
             color="trueGray.200"
             fontWeight="semibold"
-            onPress={handleEnterAsGuest}>
+            onPress={handleEnterAsGuest}
+            _light={{
+              color: 'trueGray.800',
+            }}>
             enter as a guest
           </Text>
         </Text>
@@ -143,11 +161,24 @@ export const SignIn = () => {
           minH="55px"
           alignItems="center"
           justifyContent="center"
-          onPress={handleSubmit(handleUserSignIn)}>
+          onPress={handleSubmit(handleUserSignIn)}
+          _light={{
+            bg: 'trueGray.900',
+            _pressed: {
+              bg: 'trueGray.700',
+            },
+          }}>
           {loading ? (
             <Spinner color="green.800" />
           ) : (
-            <Text textAlign="center" fontSize="lg" fontWeight="semibold">
+            <Text
+              textAlign="center"
+              fontSize="lg"
+              fontWeight="semibold"
+              color="trueGray.900"
+              _light={{
+                color: 'trueGray.100',
+              }}>
               Sign in
             </Text>
           )}

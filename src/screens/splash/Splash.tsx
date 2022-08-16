@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { CommonActions, useNavigation } from '@react-navigation/native';
 import { Center, Text } from 'native-base';
 import {
   useSharedValue,
@@ -10,11 +9,10 @@ import {
   Extrapolate,
 } from 'react-native-reanimated';
 import { AnimatedBox } from '../../components/AnimatedBox';
-import { useUser } from '../../hooks/contex-hooks/useUser';
+import { useSplash } from '../../hooks/context-hooks/useSplash';
 
 export const Splash = () => {
-  const { user } = useUser();
-  const navigation = useNavigation();
+  const { setLoading } = useSplash();
   const splashAnimation = useSharedValue(0);
 
   const brandStyles = useAnimatedStyle(() => {
@@ -63,24 +61,34 @@ export const Splash = () => {
   }, []);
 
   const startApp = () => {
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 1,
-        routes: [{ name: user?.id ? 'DRAWER' : 'LOGIN' }],
-      }),
-    );
+    setLoading(false);
   };
 
   return (
-    <Center bg="trueGray.900" flex="1">
+    <Center
+      bg="trueGray.900"
+      flex="1"
+      _light={{
+        bg: 'trueGray.100',
+      }}>
       <AnimatedBox position="absolute" alignSelf="center" style={brandStyles}>
-        <Text color="trueGray.200" fontSize="48">
+        <Text
+          color="trueGray.200"
+          fontSize="48"
+          _light={{
+            color: 'trueGray.800',
+          }}>
           H
         </Text>
       </AnimatedBox>
 
       <AnimatedBox position="absolute" alignSelf="center" style={logoStyles}>
-        <Text color="trueGray.200" fontSize="48">
+        <Text
+          color="trueGray.200"
+          fontSize="48"
+          _light={{
+            color: 'trueGray.800',
+          }}>
           HUSKY
         </Text>
       </AnimatedBox>

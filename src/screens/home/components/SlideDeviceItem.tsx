@@ -14,7 +14,7 @@ import {
 import { useWindowDimensions } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { Actionsheet } from '../../../components/actionsheet/Actionsheet';
-import { useSettings } from '../../../hooks/contex-hooks/useSettings';
+import { useSettings } from '../../../hooks/context-hooks/useSettings';
 import { ActionsheetItem } from '../../../components/actionsheet/ActionsheetItem';
 
 interface SlideItemProps extends IPressableProps {
@@ -72,12 +72,33 @@ const ListCard = ({ label, onPress }: CardProps) => {
   const { sizes } = useTheme();
   const { width } = useWindowDimensions();
   return (
-    <VStack w={width - sizes['8']} bg="trueGray.800" rounded="2xl" p="4" mb="2">
+    <VStack
+      w={width - sizes['8']}
+      bg="trueGray.800"
+      rounded="2xl"
+      p="4"
+      mb="2"
+      _light={{
+        bg: 'trueGray.200',
+      }}>
       <HStack alignItems="center" justifyContent="space-between">
         <HStack space="2" alignItems="center">
-          <Icon as={Feather} name="layers" size="sm" color="trueGray.200" />
+          <Icon
+            as={Feather}
+            name="layers"
+            size="sm"
+            color="trueGray.200"
+            _light={{
+              color: 'trueGray.800',
+            }}
+          />
 
-          <Text color="text.50" fontSize="lg">
+          <Text
+            color="trueGray.100"
+            fontSize="lg"
+            _light={{
+              color: 'trueGray.900',
+            }}>
             {label}
           </Text>
         </HStack>
@@ -95,6 +116,15 @@ const ListCard = ({ label, onPress }: CardProps) => {
                 colors: ['trueGray.800', 'trueGray.900'],
                 start: [0, 0],
                 end: [1, 0],
+              },
+            }}
+            _light={{
+              bg: {
+                linearGradient: {
+                  colors: ['trueGray.200', 'trueGray.100'],
+                  start: [0, 0],
+                  end: [1, 0],
+                },
               },
             }}>
             <Icon as={Feather} name="lock" color="emerald.500" />
@@ -114,10 +144,21 @@ const GridCard = ({ label, quantity, onPress }: CardProps) => {
       rounded="3xl"
       p="4"
       mb="2"
-      minH="140px">
+      minH="140px"
+      _light={{
+        bg: 'trueGray.200',
+      }}>
       <HStack alignItems="center" justifyContent="space-between">
         <Box>
-          <Icon as={Feather} name="layers" size="sm" color="trueGray.200" />
+          <Icon
+            as={Feather}
+            name="layers"
+            size="sm"
+            color="trueGray.200"
+            _light={{
+              color: 'trueGray.800',
+            }}
+          />
         </Box>
 
         <Pressable
@@ -134,6 +175,15 @@ const GridCard = ({ label, quantity, onPress }: CardProps) => {
                 start: [0, 0],
                 end: [1, 0],
               },
+            }}
+            _light={{
+              bg: {
+                linearGradient: {
+                  colors: ['trueGray.200', 'trueGray.100'],
+                  start: [0, 0],
+                  end: [1, 0],
+                },
+              },
             }}>
             <Icon as={Feather} name="lock" color="emerald.500" />
           </Box>
@@ -141,12 +191,15 @@ const GridCard = ({ label, quantity, onPress }: CardProps) => {
       </HStack>
 
       <Box flex="1" w="full" justifyContent="space-between" mt="4">
-        <Text color="text.50" fontSize="lg">
+        <Text
+          color="trueGray.100"
+          fontSize="lg"
+          _light={{ color: 'trueGray.900' }}>
           {label}
         </Text>
 
         {!!quantity && quantity > 0 && (
-          <Text color="text.500" fontSize="lg">
+          <Text color="trueGray.500" fontSize="lg">
             {`${quantity === 1 ? 'user' : 'users'} ${quantity}`}
           </Text>
         )}

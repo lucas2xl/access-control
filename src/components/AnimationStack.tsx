@@ -7,13 +7,16 @@ import {
   SharedValue,
   useAnimatedStyle,
 } from 'react-native-reanimated';
-import { Flex, HStack, useTheme } from 'native-base';
+import { Flex, HStack, useColorMode, useTheme } from 'native-base';
 import { AnimatedBox } from './AnimatedBox';
 
 interface CustomStackComponentsProps {
   children: ReactNode;
 }
 export const AnimationStack = ({ children }: CustomStackComponentsProps) => {
+  const { colorMode } = useColorMode();
+  const isDark = colorMode === 'dark';
+
   const { colors, radii } = useTheme();
   const progress = useDrawerProgress() as Readonly<SharedValue<number>>;
   const { width } = useWindowDimensions();
@@ -35,20 +38,28 @@ export const AnimationStack = ({ children }: CustomStackComponentsProps) => {
       transform: [{ scale: screenScale }, { translateX: screenTranslate }],
       borderWidth,
       borderRadius,
-      borderColor: colors.muted['500'],
-      shadowColor: colors.white,
+      borderColor: isDark ? colors.muted['500'] : colors.muted['200'],
+      shadowColor: isDark ? colors.white : colors.black,
       shadowOpacity,
       shadowRadius,
       elevation,
     };
   });
   return (
-    <HStack flex="1" bg="trueGray.900">
+    <HStack
+      flex="1"
+      bg="trueGray.900"
+      _light={{
+        bg: 'trueGray.100',
+      }}>
       <AnimatedBox
         flex="1"
         bg="trueGray.900"
         style={[animatedStyle]}
-        overflow="hidden">
+        overflow="hidden"
+        _light={{
+          bg: 'trueGray.100',
+        }}>
         <Flex safeArea>{children}</Flex>
       </AnimatedBox>
     </HStack>

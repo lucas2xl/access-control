@@ -6,7 +6,12 @@ interface CardProps {
 }
 export const Card = ({ children }: CardProps) => {
   return (
-    <Flex bg="trueGray.800" rounded="2xl">
+    <Flex
+      bg="trueGray.800"
+      rounded="2xl"
+      _light={{
+        bg: 'trueGray.200',
+      }}>
       {children}
     </Flex>
   );

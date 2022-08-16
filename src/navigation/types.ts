@@ -11,7 +11,7 @@ export type StackRoutes = {
   SPLASH: undefined;
   DRAWER: undefined;
   NOTIFICATIONS: undefined;
-  LOGIN: undefined;
+  SIGN_IN: undefined;
 };
 
 export type BottomTabRoutes = {

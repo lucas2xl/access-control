@@ -18,12 +18,23 @@ export const Notifications = ({ route }: any) => {
   function handleOpenSettings() {}
 
   return (
-    <Flex safeAreaTop flex="1" bg="trueGray.900">
+    <Flex
+      safeAreaTop
+      flex="1"
+      bg="trueGray.900"
+      _light={{
+        bg: 'trueGray.100',
+      }}>
       <HeaderNavigation
         title="Notifcation"
         onRightButtonPress={handleOpenSettings}
       />
-      <HStack flex="1" bg="trueGray.800">
+      <HStack
+        flex="1"
+        bg="trueGray.800"
+        _light={{
+          bg: 'trueGray.200',
+        }}>
         {!notifications.length ? (
           <Center w="full">
             <Icon as={Feather} name="bell-off" size="6xl" />
@@ -35,9 +46,21 @@ export const Notifications = ({ route }: any) => {
         ) : (
           <ScrollView mt="4" mx="4">
             <VStack space="2">
-              <Text fontSize="xl" color="trueGray.100" fontWeight="semibold">
+              <Text
+                fontSize="xl"
+                color="trueGray.100"
+                fontWeight="semibold"
+                _light={{
+                  color: 'trueGray.900',
+                }}>
                 {`${'29'} `}
-                <Text fontSize="sm" color="trueGray.400" fontWeight="light">
+                <Text
+                  fontSize="sm"
+                  color="trueGray.400"
+                  fontWeight="light"
+                  _light={{
+                    color: 'trueGray.600',
+                  }}>
                   July
                 </Text>
               </Text>
@@ -45,9 +68,21 @@ export const Notifications = ({ route }: any) => {
               <NotificationCard />
               <NotificationCard />
 
-              <Text fontSize="xl" color="trueGray.100" fontWeight="semibold">
+              <Text
+                fontSize="xl"
+                color="trueGray.100"
+                fontWeight="semibold"
+                _light={{
+                  color: 'trueGray.900',
+                }}>
                 {`${'27'} `}
-                <Text fontSize="sm" color="trueGray.400" fontWeight="light">
+                <Text
+                  fontSize="sm"
+                  color="trueGray.400"
+                  fontWeight="light"
+                  _light={{
+                    color: 'trueGray.600',
+                  }}>
                   July
                 </Text>
               </Text>

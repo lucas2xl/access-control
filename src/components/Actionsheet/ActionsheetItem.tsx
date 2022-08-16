@@ -35,6 +35,18 @@ export const ActionsheetItem = ({
         color: 'trueGray.200',
       }}
       leftIcon={icon ? <Icon as={icon} name={iconName} /> : undefined}
+      _light={{
+        bg: 'trueGray.200',
+        _text: {
+          color: 'trueGray.800',
+        },
+        _icon: {
+          color: 'trueGray.800',
+        },
+        _pressed: {
+          bg: 'trueGray.300',
+        },
+      }}
       {...rest}>
       {label}
     </Actionsheet.Item>

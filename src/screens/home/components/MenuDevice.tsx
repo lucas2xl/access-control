@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
   HStack,
   Icon,
@@ -9,7 +9,7 @@ import {
   ThreeDotsIcon,
 } from 'native-base';
 import { Feather, MaterialCommunityIcons } from '@expo/vector-icons';
-import { useSettings } from '../../../hooks/contex-hooks/useSettings';
+import { useSettings } from '../../../hooks/context-hooks/useSettings';
 
 export const MenuDevice = () => {
   const { settings, updateSettings } = useSettings();
@@ -34,10 +34,18 @@ export const MenuDevice = () => {
           _pressed={{
             bg: 'trueGray.600',
           }}
+          _light={{
+            _pressed: {
+              bg: 'trueGray.400',
+            },
+          }}
           {...triggerProps}>
           <ThreeDotsIcon size="sm" color="muted.400" />
         </Pressable>
-      )}>
+      )}
+      _light={{
+        bg: 'trueGray.300',
+      }}>
       {settings?.viewType === 'grid' ? (
         <MenuItem
           label="List View"
@@ -77,8 +85,20 @@ const MenuItem = ({ onPress, label, iconLib, iconName }: MenuItemProps) => {
       borderColor="trueGray.500"
       onPressOut={onPress}>
       <HStack space="2" alignItems="center">
-        <Icon as={iconLib} name={iconName} color="trueGray.200" />
-        <Text color="trueGray.200" fontSize="lg">
+        <Icon
+          as={iconLib}
+          name={iconName}
+          color="trueGray.200"
+          _light={{
+            color: 'trueGray.800',
+          }}
+        />
+        <Text
+          color="trueGray.200"
+          fontSize="lg"
+          _light={{
+            color: 'trueGray.800',
+          }}>
           {label}
         </Text>
       </HStack>

@@ -14,7 +14,7 @@ import { DrawerHeader } from './DrawerHeader';
 import { Box, Divider, VStack } from 'native-base';
 import { DrawerItem } from './DrawerItem';
 import { DrawerIcon, Tab } from '../../utils/getDrawerIcon';
-import { useUser } from '../../hooks/contex-hooks/useUser';
+import { useUser } from '../../hooks/context-hooks/useUser';
 
 export const CustomDrawerContent = ({
   ...props
@@ -43,14 +43,27 @@ export const CustomDrawerContent = ({
   }
 
   return (
-    <VStack safeArea flex="1" bg="trueGray.900" p="4">
+    <VStack
+      safeArea
+      flex="1"
+      bg="trueGray.900"
+      p="4"
+      _light={{
+        bg: 'trueGray.100',
+      }}>
       <AnimatedBox flex="1" style={style}>
         <DrawerHeader
           username={user?.username}
           city={user?.city}
           avatar={user?.photo}
         />
-        <Divider bg="trueGray.600" mt="2" />
+        <Divider
+          bg="trueGray.600"
+          mt="2"
+          _light={{
+            bg: 'trueGray.400',
+          }}
+        />
         <Box flex="1" mt="10" alignItems="flex-start">
           {props.state.routes.map(({ name, key }) => (
             <DrawerItem
@@ -62,7 +75,13 @@ export const CustomDrawerContent = ({
           ))}
         </Box>
 
-        <Divider bg="trueGray.600" mb="2" />
+        <Divider
+          bg="trueGray.600"
+          mb="2"
+          _light={{
+            bg: 'trueGray.400',
+          }}
+        />
         <DrawerItem
           key={'LOGOUT'}
           text={'Logout'}

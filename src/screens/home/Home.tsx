@@ -146,7 +146,6 @@ export const Home = ({ route }: any) => {
   function handleNavigateToDeviceSettings() {}
 
   function handleSelectedGroupId(id: string | number) {
-    console.log(id);
     setSelectedGroupId(String(id));
   }
 
@@ -172,7 +171,13 @@ export const Home = ({ route }: any) => {
 
       <Flex>
         <AnimatedBox style={userInfoStyle} w="full" px="4">
-          <Text fontSize="3xl" bold color="text.300">
+          <Text
+            fontSize="3xl"
+            bold
+            color="text.300"
+            _light={{
+              color: 'text.600',
+            }}>
             Welcome, Lucas
           </Text>
 
@@ -195,6 +200,11 @@ export const Home = ({ route }: any) => {
               _icon={{
                 color: 'emerald.500',
                 size: 'md',
+              }}
+              _light={{
+                _text: {
+                  color: 'trueGray.900',
+                },
               }}
               leftIcon={<AddIcon />}>
               add device
@@ -228,7 +238,13 @@ export const Home = ({ route }: any) => {
           mb="4"
           px="4"
           pt="2">
-          <Text color="text.300" fontSize="lg" fontWeight="medium">
+          <Text
+            color="text.300"
+            fontSize="lg"
+            fontWeight="medium"
+            _light={{
+              color: 'text.600',
+            }}>
             Devices
           </Text>
           <MenuDevice />

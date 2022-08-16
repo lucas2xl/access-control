@@ -1,6 +1,5 @@
 import React, { ReactNode, useEffect, useState } from 'react';
-import { Appearance } from 'react-native';
-import { SettingsContext, SettingsContextProps } from './SettingsContext';
+import { SettingsContext } from './SettingsContext';
 import { getItem, setItem } from '../utils/localStorage';
 import { Settings } from '../interfaces/settings';
 
@@ -9,7 +8,6 @@ type ProviderProps = {
 };
 
 export const defaultSettings: Settings = {
-  darkMode: Appearance.getColorScheme() === 'dark',
   viewType: 'list',
   language: 'en',
 };
@@ -38,9 +36,8 @@ export const SettingsContextProvider = ({ children }: ProviderProps) => {
     setItem('settings', JSON.stringify(settingsClone));
   }, [settings]);
 
-  const value: SettingsContextProps = { settings, updateSettings };
   return (
-    <SettingsContext.Provider value={value}>
+    <SettingsContext.Provider value={{ settings, updateSettings }}>
       {children}
     </SettingsContext.Provider>
   );

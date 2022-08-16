@@ -17,7 +17,12 @@ export const Actionsheet = ({
 }: ModalProps) => {
   return (
     <Ac isOpen={isOpen} onClose={onClose} {...rest}>
-      <Ac.Content bg="trueGray.800" p="0">
+      <Ac.Content
+        bg="trueGray.800"
+        p="0"
+        _light={{
+          bg: 'trueGray.200',
+        }}>
         {children}
         {isCanceled && (
           <ActionsheetItem
@@ -26,6 +31,9 @@ export const Actionsheet = ({
             alignItems="center"
             borderTopWidth="1"
             borderColor="trueGray.700"
+            _light={{
+              borderColor: 'trueGray.300',
+            }}
           />
         )}
       </Ac.Content>

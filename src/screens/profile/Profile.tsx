@@ -4,6 +4,7 @@ import {
   FormControl,
   Heading,
   ScrollView,
+  useColorMode,
   useDisclose,
   VStack,
 } from 'native-base';
@@ -17,18 +18,29 @@ import { ModalBodyItem } from '../../components/modal/ModalBodyItem';
 import { Actionsheet } from '../../components/actionsheet/Actionsheet';
 import { ActionsheetItem } from '../../components/actionsheet/ActionsheetItem';
 import * as ImagePicker from 'expo-image-picker';
-import { useUser } from '../../hooks/contex-hooks/useUser';
+import { useUser } from '../../hooks/context-hooks/useUser';
 
-export const Profile = ({ route }: any) => {
+export const Profile = () => {
   const { user, updateUser } = useUser();
-  const { isOpen, onOpen, onClose } = useDisclose();
+  const { colorMode, toggleColorMode } = useColorMode();
+  const [username, setUsername] = useState(user?.username);
+  const [isDarkMode, setIsDarkMode] = useState(colorMode === 'dark');
+  const {
+    isOpen: showUsername,
+    onOpen: onUsernameOpen,
+    onClose: onUsernameClose,
+  } = useDisclose();
   const {
     isOpen: showAvatar,
     onOpen: onAvatarOpen,
     onClose: onAvatarClose,
   } = useDisclose();
 
-  function handleSave() {}
+  function handleChangeUsername() {
+    onUsernameClose();
+    updateUser({ username });
+  }
+
   async function handlePickImage() {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -37,18 +49,28 @@ export const Profile = ({ route }: any) => {
       quality: 1,
     });
 
-    console.log({ result });
     if (!result.cancelled) {
       onAvatarClose();
       updateUser({ photo: result.uri });
     }
   }
 
+  function handleChangeTheme() {
+    toggleColorMode();
+    setIsDarkMode((prevState) => !prevState);
+  }
+
   return (
     <AnimationStack>
       <Header>
         <Center p="4">
-          <Heading color="trueGray.100">Profile</Heading>
+          <Heading
+            color="trueGray.100"
+            _light={{
+              color: 'trueGray.900',
+            }}>
+            Profile
+          </Heading>
         </Center>
       </Header>
       <VStack>
@@ -72,7 +94,7 @@ export const Profile = ({ route }: any) => {
                 icon={Feather}
                 type="arrow-label"
                 arrowLabel={user?.username}
-                onPress={onOpen}
+                onPress={onUsernameOpen}
               />
               <CardItem
                 label="Password"
@@ -117,8 +139,8 @@ export const Profile = ({ route }: any) => {
                 iconName="moon"
                 icon={Feather}
                 type="switch"
-                // switchValue={true}
-                // onChangeSwitch={() => {}}
+                switchValue={isDarkMode}
+                onChangeSwitch={handleChangeTheme}
               />
             </Card>
             <Card>
@@ -135,11 +157,16 @@ export const Profile = ({ route }: any) => {
 
       <Modal
         headerText="Edit Username"
-        isOpen={isOpen}
-        onClose={onClose}
-        onSave={handleSave}>
+        isOpen={showUsername}
+        onClose={onUsernameClose}
+        onSave={handleChangeUsername}>
         <FormControl>
-          <ModalBodyItem placeholder="username" type="text" />
+          <ModalBodyItem
+            placeholder="username"
+            type="text"
+            value={username}
+            onChangeText={setUsername}
+          />
         </FormControl>
       </Modal>
 

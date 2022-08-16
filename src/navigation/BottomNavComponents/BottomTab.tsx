@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { NavigationState, useNavigation } from '@react-navigation/native';
 import { BlurView } from 'expo-blur';
 import { AppNavigationType } from '../types';
-import { Pressable, Text, useTheme } from 'native-base';
+import { Pressable, Text, useColorMode, useTheme } from 'native-base';
 import { getBottomTabIcon } from '../../utils/getBottomTabIcon';
 import { useWindowDimensions } from 'react-native';
 import {
@@ -30,6 +30,8 @@ enum Tabs {
 }
 
 export const BottomTab = ({ tabs, state }: BottomTabProps) => {
+  const { colorMode } = useColorMode();
+  const isDark = colorMode === 'dark';
   const activeTabIndex = state.index;
   const { colors, sizes } = useTheme();
   const navigation = useNavigation<AppNavigationType<'DRAWER'>>();
@@ -90,10 +92,13 @@ export const BottomTab = ({ tabs, state }: BottomTabProps) => {
       overflow="hidden"
       borderWidth="1"
       borderColor="trueGray.800"
-      style={[animatedStyle]}>
+      style={[animatedStyle]}
+      _light={{
+        borderColor: 'trueGray.200',
+      }}>
       <BlurView
         intensity={80}
-        tint="dark"
+        tint={isDark ? 'dark' : 'light'}
         style={{ flexDirection: 'row', flex: 1 }}>
         {tabs.map((tab, key: number) => {
           return (
@@ -101,7 +106,10 @@ export const BottomTab = ({ tabs, state }: BottomTabProps) => {
               key={key}
               flex="1"
               alignItems="center"
-              borderColor="white">
+              borderColor="white"
+              _light={{
+                borderColor: 'black',
+              }}>
               <Pressable
                 alignItems="center"
                 flex="1"
@@ -113,12 +121,15 @@ export const BottomTab = ({ tabs, state }: BottomTabProps) => {
                   tab.name,
                   tabs[activeTabIndex].name,
                   colors.emerald['600'],
-                  colors.white,
+                  isDark ? colors.white : colors.black,
                 )}
                 <Text
                   color={key === activeTabIndex ? 'emerald.600' : 'white'}
                   mt="1"
-                  fontSize="8">
+                  fontSize="8"
+                  _light={{
+                    color: key === activeTabIndex ? 'emerald.600' : 'black',
+                  }}>
                   {tab.name}
                 </Text>
               </Pressable>
