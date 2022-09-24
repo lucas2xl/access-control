@@ -1,7 +1,7 @@
 <div align="center">
   <!-- animation gif -->
   <br />
-  <h1>Access control app/h1>
+  <h1>Access control app</h1>
 </div>
 
 - [x] - Dark mode
