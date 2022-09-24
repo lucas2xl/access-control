@@ -1,6 +1,5 @@
 <div align="center">
-  <!-- animation gif -->
-  <br />
+  <br />![animation](https://user-images.githubusercontent.com/65921350/192120336-dc23c230-db11-4c60-adca-df568059e350.gif)
   <h1>Access control app</h1>
 </div>
 
