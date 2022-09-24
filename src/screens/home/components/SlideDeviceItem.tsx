@@ -71,6 +71,7 @@ interface CardProps {
 const ListCard = ({ label, onPress }: CardProps) => {
   const { sizes } = useTheme();
   const { width } = useWindowDimensions();
+
   return (
     <VStack
       w={width - sizes['8']}

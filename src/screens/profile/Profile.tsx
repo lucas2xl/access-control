@@ -55,7 +55,7 @@ export const Profile = () => {
     }
   }
 
-  function handleChangeTheme() {
+  function handleToggleTheme() {
     toggleColorMode();
     setIsDarkMode((prevState) => !prevState);
   }
@@ -140,7 +140,7 @@ export const Profile = () => {
                 icon={Feather}
                 type="switch"
                 switchValue={isDarkMode}
-                onChangeSwitch={handleChangeTheme}
+                onChangeSwitch={handleToggleTheme}
               />
             </Card>
             <Card>

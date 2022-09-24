@@ -6,7 +6,7 @@ export const Settings = ({ route }: any) => {
   return (
     <AnimationStack>
       <Flex>
-        <Text color="white">Devices</Text>
+        <Text color="white">Settings</Text>
       </Flex>
     </AnimationStack>
   );

@@ -6,7 +6,7 @@ export const Smart = ({ route }: any) => {
   return (
     <AnimationStack>
       <Flex>
-        <Text color="white">SMART</Text>
+        <Text color="white">Smart</Text>
       </Flex>
     </AnimationStack>
   );
